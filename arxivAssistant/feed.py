@@ -1,4 +1,13 @@
 import feedparser
+import re
+
+
+#extract text from an html hyperlink
+def extract_text(html):
+    res = re.search(r'>(.*)<', html)
+    if res is not None:
+        return res.group(1)
+
 
 class ArxivFeed:
 
@@ -6,16 +15,14 @@ class ArxivFeed:
         self.feed_url = feed_url
         self.feed = feedparser.parse(self.feed_url)
 
-    @property
-    def entries(self):
-
         entries = []
 
         for entry in self.feed['entries']:
-
             entries.append({'title': entry['title'],
                             'link': entry['link'],
                             'abstract': entry['summary'],
-                            'authors': entry['authors']})
+                            'authors': [extract_text(author) for author in entry['authors'][0]['name'].split(',')]})
+        self.entries = entries
 
-        return entries
+
+today = ArxivFeed()
