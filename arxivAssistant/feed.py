@@ -2,7 +2,7 @@ import feedparser
 import re
 
 
-#extract text from an html hyperlink
+# Extract text from a html hyperlink
 def extract_text(html):
     res = re.search(r'>(.*)<', html)
     if res is not None:
