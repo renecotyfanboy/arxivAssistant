@@ -23,6 +23,3 @@ class ArxivFeed:
                             'abstract': entry['summary'],
                             'authors': [extract_text(author) for author in entry['authors'][0]['name'].split(',')]})
         self.entries = entries
-
-
-today = ArxivFeed()

@@ -5,14 +5,19 @@ __version__ = 0.1
 setup(
     name='arxivAssistant',
     version=__version__,
-    description='Differentiate, compile, and transform Numpy code.',
+    description='Read daily arxiv feed with console',
     author='Simon Dupourqué',
     author_email='sdupourque@irap.omp.eu',
     packages=find_packages(exclude=["examples"]),
     install_requires=[
         'feedparser'
     ],
-    url='???',
+    url='https://github.com/renecotyfanboy/arxivAssistant',
     license='MIT',
     zip_safe=False,
+    entry_points={
+            'console_scripts': [
+                'arxiv-today=arxivAssistant.scripts.today:main'
+            ],
+        }
 )
