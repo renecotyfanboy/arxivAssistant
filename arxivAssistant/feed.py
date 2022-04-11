@@ -20,6 +20,8 @@ class ArxivFeed:
         for entry in self.feed['entries']:
             entries.append({'title': entry['title'],
                             'link': entry['link'],
-                            'abstract': entry['summary'],
-                            'authors': [extract_text(author) for author in entry['authors'][0]['name'].split(',')]})
+                            'abstract': entry['summary'][3:-4].replace('\n', ' '),
+                            'authors': [extract_text(author) for author in entry['authors'][0]['name'].split(',') if extract_text(author) is not None]})
         self.entries = entries
+
+today: ArxivFeed = ArxivFeed()
