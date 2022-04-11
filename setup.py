@@ -10,7 +10,8 @@ setup(
     author_email='sdupourque@irap.omp.eu',
     packages=find_packages(exclude=["examples"]),
     install_requires=[
-        'feedparser'
+        'feedparser',
+        'rich'
     ],
     url='https://github.com/renecotyfanboy/arxivAssistant',
     license='MIT',
