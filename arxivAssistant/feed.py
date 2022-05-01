@@ -1,5 +1,5 @@
 import feedparser
-from article import Article
+from .article import Article
 
 
 class ArxivFeed:
@@ -8,11 +8,11 @@ class ArxivFeed:
         self.feed_url = feed_url
         self.feed = feedparser.parse(self.feed_url)
 
-        entries = []
+        articles = []
 
         for entry in self.feed['entries']:
-            entries.append(Article.from_entry(entry))
-        self.entries = entries
+            articles.append(Article.from_entry(entry))
+        self.articles = articles
 
 
 today: ArxivFeed = ArxivFeed()
