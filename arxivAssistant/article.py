@@ -1,5 +1,7 @@
 import re
+from rich.console import Console
 from typing import NamedTuple
+from html import unescape
 
 
 def extract_text(html):
@@ -27,3 +29,23 @@ class Article(NamedTuple):
             split_authors(entry['authors']),
             entry['link']
         )
+
+    # make a method to print the article in a rich way as done in today.py
+    def to_console(self, console: Console):
+
+        console.rule(self.title.split('(')[0], style="bold red")
+        # this should be done in the feed class
+        # if there are more than 10 authors, keep only the first 10 and replace the rest with "et al."
+        if len(self.authors) > 10:
+            author_list = self.authors[:10] + ["et al."]
+        else:
+            author_list = self.authors
+
+        # make a string with all the authors separated by commas
+        authors = ", ".join(author_list)
+        # decode numerical unicode characters in the authors string
+        authors = unescape(authors)
+
+        console.print(f"{authors}", style="italic green")
+        console.print(self.abstract)
+        console.print()
