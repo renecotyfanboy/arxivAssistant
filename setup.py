@@ -11,7 +11,8 @@ setup(
     packages=find_packages(exclude=["examples"]),
     install_requires=[
         'feedparser',
-        'rich'
+        'rich',
+        'textual'
     ],
     url='https://github.com/renecotyfanboy/arxivAssistant',
     license='MIT',
