@@ -45,8 +45,8 @@ class Article(NamedTuple):
         authors = unescape(authors)
 
         panel_group = Group(
-            Panel(self.title, style="bold red"),
-            Panel(f"{authors}", style="italic green"),
+            Panel(Text(self.title, justify="center"), style="bold red"),
+            Panel(Text(authors, justify="center"), style="italic green", title='Authors'),
             Panel(Text(self.abstract, justify="full"))
         )
 
