@@ -6,29 +6,17 @@ Usage
 Installation
 ------------
 
-To use Lumache, first install it using pip:
+To use arxivAssistant, first install it using pip:
 
 .. code-block:: console
 
-   (.venv) $ pip install lumache
+   $ pip install arxivAssistant --upgrade
 
-Creating recipes
-----------------
+Check daily articles
+--------------------
 
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+Use directly the following command in console 
 
-.. autofunction:: lumache.get_random_ingredients
+.. code-block:: console
 
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
-
-.. autoexception:: lumache.InvalidKindError
-
-For example:
-
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
-
+   $ arxiv-today
