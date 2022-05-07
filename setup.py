@@ -5,7 +5,7 @@ __version__ = 0.3
 setup(
     name='arxivAssistant',
     version=str(__version__),
-    python_requires='>=3.10',
+    python_requires='>=3.10.4',
     description='Read daily arxiv feed with console',
     author='Simon Dupourqué',
     author_email='sdupourque@irap.omp.eu',
