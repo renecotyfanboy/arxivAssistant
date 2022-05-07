@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
-__version__ = 0.2
+__version__ = 0.3
 
 setup(
     name='arxivAssistant',
-    version=__version__,
+    version=str(__version__),
     description='Read daily arxiv feed with console',
     author='Simon Dupourqué',
     author_email='sdupourque@irap.omp.eu',
