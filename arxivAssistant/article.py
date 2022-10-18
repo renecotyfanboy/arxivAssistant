@@ -47,14 +47,14 @@ class Article(NamedTuple):
         panel_group = Group(
             Panel(Text(self.title, justify="center"), style="bold red"),
             Panel(Text(authors, justify="center"), style="italic green", title='Authors'),
-            Panel(Text(self.abstract, justify="full"))
+            Panel(Text(self.abstract, justify="full")),
+            Panel(Text(self.link, justify="center"), style="bold yellow")
         )
 
         return panel_group#text
 
     # make a method to print the article in a rich way as done in today.py
     def to_console(self, console: Console):
-
         console.rule(self.title, style="bold red")
         # this should be done in the feed class
         # if there are more than 10 authors, keep only the first 10 and replace the rest with "et al."
