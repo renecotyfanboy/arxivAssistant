@@ -1,5 +1,4 @@
 import re
-from .article import Article
 from rich.console import Console
 from rich.text import Text
 from rich.panel import Panel
@@ -25,7 +24,7 @@ class Article(NamedTuple):
     link: str
 
     @classmethod
-    def from_entry(cls, entry: dict) -> Article:
+    def from_entry(cls, entry: dict) -> 'Article':
         return cls(
             entry['title'],
             entry['summary'][3:-4].replace('\n', ' '),
