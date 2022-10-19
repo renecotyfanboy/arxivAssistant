@@ -10,7 +10,8 @@ setup(
     description='Read daily arxiv feed with console',
     author='Simon Dupourqué',
     author_email='sdupourque@irap.omp.eu',
-    packages=find_packages(exclude=["examples"]),
+    package_dir={'': "src"},
+    packages=find_packages("src"),
     install_requires=[
         'feedparser',
         'rich',

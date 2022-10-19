@@ -1,4 +1,4 @@
-from arxivAssistant.app import ArxivApp
+from src.arxivAssistant.app import ArxivApp
 
 
 def main() -> None:
