@@ -1,8 +1,9 @@
 import re
+from .article import Article
 from rich.console import Console
 from rich.text import Text
 from rich.panel import Panel
-from typing import NamedTuple
+from typing import NamedTuple, List
 from html import unescape
 from rich.console import Group
 
@@ -20,11 +21,11 @@ def split_authors(authors):
 class Article(NamedTuple):
     title: str
     abstract: str
-    authors: list[str]
+    authors: List[str]
     link: str
 
     @classmethod
-    def from_entry(cls, entry: dict) -> 'Article':
+    def from_entry(cls, entry: dict) -> Article:
         return cls(
             entry['title'],
             entry['summary'][3:-4].replace('\n', ' '),
