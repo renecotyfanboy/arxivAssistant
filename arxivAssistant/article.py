@@ -6,6 +6,7 @@ from typing import NamedTuple
 from html import unescape
 from rich.console import Group
 
+
 def extract_text(html):
     res = re.search(r'>(.*)<', html)
     if res is not None:
@@ -51,9 +52,8 @@ class Article(NamedTuple):
             Panel(Text(self.link, justify="center"), style="bold yellow")
         )
 
-        return panel_group#text
+        return panel_group
 
-    # make a method to print the article in a rich way as done in today.py
     def to_console(self, console: Console):
         console.rule(self.title, style="bold red")
         # this should be done in the feed class
