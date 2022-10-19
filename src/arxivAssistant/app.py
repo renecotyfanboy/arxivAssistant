@@ -1,7 +1,7 @@
 from textual.app import App
 from textual.widgets import Footer, Header
-from src.arxivAssistant.list import ListViewUo
-from src.arxivAssistant.feed import ArxivFeed
+from .list import ListViewUo
+from arxivAssistant.feed import ArxivFeed
 from textual.reactive import Reactive
 from textual.widgets import ScrollView
 from textual.widgets import Button, ButtonPressed
