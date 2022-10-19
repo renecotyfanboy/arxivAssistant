@@ -1,7 +1,15 @@
+import sys
 from setuptools import setup, find_packages
 
 __version__ = '0.3.1'
 
+# READ README.md for long description on PyPi.
+try:
+    long_description = open("README.md", encoding="utf-8").read()
+except Exception as e:
+    sys.stderr.write("Failed to read README.md:\n  {}\n".format(e))
+    sys.stderr.flush()
+    long_description = ""
 
 setup(
     name='arxivAssistant',
@@ -24,5 +32,7 @@ setup(
             'console_scripts': [
                 'arxiv-today=arxivAssistant.scripts.today:main'
             ],
-        }
+        },
+    long_description=long_description,
+    long_description_content_type="text/markdown",
 )
