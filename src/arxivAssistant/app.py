@@ -3,6 +3,7 @@ from textual.app import App, ComposeResult
 from textual.constants import BORDERS
 from textual.widgets import Button, Label
 from textual.containers import Vertical
+from textual.widgets import Header, Footer
 
 today = ArxivFeed()
 
@@ -15,7 +16,7 @@ class BorderButtons(Vertical):
     DEFAULT_CSS = """
     BorderButtons {
         dock: left;
-        width: 24;
+        width: 30;
         overflow-y: scroll;
     }
     BorderButtons > Button {
@@ -42,10 +43,14 @@ class ArxivApp(App):
     }
     """
 
+    BINDINGS = [("q", "quit", "Quit")]
+
     def compose(self):
         yield BorderButtons()
         self.text = Label(TEXT, id="text")
         yield self.text
+        yield Header()
+        yield Footer()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         self.text.update(key_to_renderable[event.button.id])
