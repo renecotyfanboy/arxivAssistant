@@ -1,52 +1,52 @@
-from textual.app import App
-from textual.widgets import Footer, Header
-from .list import ListViewUo
 from arxivAssistant.feed import ArxivFeed
-from textual.reactive import Reactive
-from textual.widgets import ScrollView
-from textual.widgets import Button, ButtonPressed
-from rich.panel import Panel
+from textual.app import App, ComposeResult
+from textual.constants import BORDERS
+from textual.widgets import Button, Label
+from textual.containers import Vertical
+
+today = ArxivFeed()
+
+key_to_renderable = {article.title:article.abstract for article in today.articles}
+
+TEXT = """This is a prototype of arxivAssistant, click any button to checkout an article"""
 
 
-class ArticleName(Button):
+class BorderButtons(Vertical):
+    DEFAULT_CSS = """
+    BorderButtons {
+        dock: left;
+        width: 24;
+        overflow-y: scroll;
+    }
+    BorderButtons > Button {
+        width: 100%;
+    }
+    """
 
-    mouse_over = Reactive(False)
-
-    def __init__(self, text: str):
-        super().__init__(text)
-        self.text = text
-
-    def render(self) -> Panel:
-        return Panel(self.text, style=("on red" if self.mouse_over else ""))
-
-    def on_enter(self) -> None:
-        self.mouse_over = True
-
-    def on_leave(self) -> None:
-        self.mouse_over = False
+    def compose(self) -> ComposeResult:
+        for article in today.articles:
+            yield Button(article.title, id=article.title)
 
 
 class ArxivApp(App):
+    """Demonstrates the border styles."""
 
-    async def on_mount(self) -> None:
-        today = ArxivFeed()
-        self.body = ScrollView()
-        self.articles = {article.title:article for article in today.articles}
+    CSS = """
+    #text {
+        margin: 2 4;
+        padding: 2 4;
+        border: solid $secondary;
+        height: auto;
+        background: $panel;
+        color: $text;
+    }
+    """
 
-        await self.view.dock(Header(), edge="top")
-        await self.view.dock(Footer(), edge="bottom")
-        await self.view.dock(
-            ListViewUo([ArticleName(article.title) for article in today.articles]), edge="left", size=60)
-        await self.view.dock(self.body, edge="right")
+    def compose(self):
+        yield BorderButtons()
+        self.text = Label(TEXT, id="text")
+        yield self.text
 
-    async def on_load(self) -> None:
-        """Bind keys here."""
-        await self.bind("q", "quit", "Quit")
-
-    async def handle_button_pressed(self, message: ButtonPressed) -> None:
-        """A message sent by the button widget"""
-
-        assert isinstance(message.sender, Button)
-        button_name = message.sender.name
-
-        await self.body.update(self.articles[button_name])
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        self.text.update(key_to_renderable[event.button.id])
+        self.bell()
